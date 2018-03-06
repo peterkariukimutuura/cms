@@ -1,0 +1,99 @@
+body{
+	
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+        font-weight: lighter;
+        margin-bottom: 100px;
+}
+div#navbar{
+    background-color: rgb(58, 11, 17);
+    height: 80px;
+    color: #fff;
+    margin: 0px;
+    padding: 0px;
+}
+
+a#heading{
+     color: white;
+    /* display: inline-block; */
+    font-size: 19px;
+    margin: 0;
+    text-transform: uppercase;
+    padding: 0.56em 1.3em;
+    border: 1px solid white;
+    margin-left: 15px;
+    position: absolute;
+    top: 23px;
+}
+
+div#middlesection{
+	color:  #333333;
+	font-weight: 300;
+	font-family: inherit;
+}
+h2#createaccount{
+    text-align: center;
+    font-weight: lighter;
+}
+input{
+    width: 420px;
+    padding: 2px;
+    height: 30px;
+    text-indent: 10px;
+    margin-top: 5px;
+}
+form{
+        width: 475px;
+    margin: auto;
+    left: 84px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+label{
+    float: left;
+        color: #095fa9;
+}
+
+button{
+     width: 91%;
+    padding: 3px;
+    color: #a93509;
+    font-size: 22px;
+    font-weight: lighter;
+    background: #d3d3d4;
+    border: 1px solid #b1acac;
+}
+
+
+
+small{
+    text-align: center;
+}
+
+
+small#errormessage{
+    color: red;
+    text-align: right;
+    position: absolute;
+    /* display: -webkit-inline-box; */
+    margin-top: 15px;
+    margin-left: -145px;
+}
+
+div#successmessage{
+    text-align: center;
+    color: blue;
+}
+
+div#errormessage{
+    text-align: center;
+    color: red;
+}
+
+select{
+        width: 90%;
+    padding: 8px;
+    background-color: transparent;
+    outline: none;
+}
