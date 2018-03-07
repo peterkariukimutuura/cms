@@ -1,8 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Jura');
+
+
 body{
 	
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
         font-weight: lighter;
         margin-bottom: 100px;
+}
+h1{
+    font-family: 'Jura', sans-serif;
 }
 div#navbar{
     background-color: rgb(58, 11, 17);

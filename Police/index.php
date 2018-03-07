@@ -5,8 +5,10 @@ session_start();
 
 include '../register/assets/databaseconnection.php';
 
-
-
+if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SESSION['email'])) {
+  $_SESSION['errormessage']="Kindly login To Proceed!";
+  header("location:http://localhost/courtcasesystem/login/");
+}
 
  ?>
 <!DOCTYPE html>
@@ -21,7 +23,7 @@ include '../register/assets/databaseconnection.php';
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Clerk</title>
+    <title>Police</title>
 	
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
    <link rel="stylesheet" href="../register/css/stylesheet.css">
@@ -32,10 +34,11 @@ include '../register/assets/databaseconnection.php';
   <body>
 	<div id="navbar">
 		<a id="heading" class="pull-left">Court Case System</a>
-		<a id="heading" style="left: 1080px;text-decoration: none;" class="pull-right" href="../register">Logout</a>
+		<a id="heading" style="left: 1080px;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
-
-<h1>Police</h1>
+  <h1>Police,Page</h1><br>
+<p>Welcome <?php echo $_SESSION['username']; ?>, You are now logged In as <?php echo $_SESSION['occupation']; ?></p><br>
+<p><?php echo $_SESSION['email']; ?></p>
 
 
 
