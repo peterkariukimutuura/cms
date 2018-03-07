@@ -5,14 +5,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email=mysqli_real_escape_string($conn,$_POST['email']);
 	$occupation=mysqli_real_escape_string($conn,$_POST['occupation']);
 	$password=mysqli_real_escape_string($conn,$_POST['password']);
-	$password=sha1($password);
+	//$password=sha1($password);
 
-	$sql="INSERT INTO `users` (`username`, `occupation`, `email`, `password`) VALUES ('$username', '$occupation', '$email', '$password')";
 
-	if (mysqli_query($conn,$sql)) {
-		$_SESSION['successmessage']="You Have Been Successfully Registered as ".$occupation;
+	$check = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users WHERE email ='$email' AND occupation='$occupation'"));
+	if ($check>0) {
+		$_SESSION['errormessage']=$email. " is already registered as " .$occupation . " Kindly try with another email.";
 	}else{
-		$_SESSION['successmessage']=mysqli_error($conn);
+
+		$sql="INSERT INTO `users` (`username`, `occupation`, `email`, `password`) VALUES ('$username', '$occupation', '$email', '$password')";
+
+		if (mysqli_query($conn,$sql)) {
+			$_SESSION['successmessage']="You Have Been Successfully Registered as ".$occupation;
+		}else{
+			$_SESSION['errormessage']=mysqli_error($conn);
+		}
 	}
 }
 

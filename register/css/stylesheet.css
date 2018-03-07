@@ -98,3 +98,25 @@ select{
     background-color: transparent;
     outline: none;
 }
+
+
+a#heading:hover{
+    background-color: #ad0808;
+    cursor: pointer;
+}
+
+
+
+/*styling the landing page*/
+/*styling the landing page*/
+
+div#sectionone{
+    height: 500px;
+    width: 100%;
+    background-image: url(../../img/gavel.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+/*styling the landing page*/
+/*styling the landing page*/
+/*styling the landing page*/
