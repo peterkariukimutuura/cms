@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email=mysqli_real_escape_string($conn,$_POST['email']);
 	$occupation=mysqli_real_escape_string($conn,$_POST['occupation']);
 	$password=mysqli_real_escape_string($conn,$_POST['password']);
-	//$password=sha1($password);
+	$password=sha1($password);
 
 
 	$check = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users WHERE email ='$email' AND occupation='$occupation'"));
