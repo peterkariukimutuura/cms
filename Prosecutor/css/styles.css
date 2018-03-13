@@ -1,0 +1,41 @@
+div.contentholder{
+	width: 100%;
+}
+
+div.areaone{
+	width: 30%;
+	float: left;
+	text-align: center;
+}
+
+div.areatwo{
+	width: 70%;
+	float: left;
+}
+
+div.alertinfo{
+	    width: 50%;
+    margin: 10px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #104179;
+    color: #e8e8e8;
+}
+
+button#approve,
+button#reject{
+    width: 75px;
+
+    padding: 3px;
+    color: #e8e8e7;
+    font-size: 14px;
+    font-weight: lighter;
+    background: #104179;
+    border: 1px solid #b1acac;
+}
+
+button#reject{
+	background: #ef042f;
+    border: 1px solid #ffffff;
+    margin-left: 5px;
+}
