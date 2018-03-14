@@ -75,7 +75,12 @@ $results=mysqli_query($conn,$sql);
 						 </small></td>
 						<td><small><?php echo $row['dateofarrest']; ?></small></td>
 						<td style="text-align: center;">
-							<small><button id="approve">Approve</button><button id="reject">Reject</button></small>
+							<small>
+								<button onclick="Approve('<?php echo $row['id']; ?>')"  id="approve"
+									class="approve<?php echo $row['id']; ?>">Approve</button>
+									<button onclick="Reject('<?php echo $row['id']; ?>')" id="reject"
+										class="reject<?php echo $row['id']; ?>">Reject</button>
+							</small>
 						</td>
 					</tr>
 				<?php endwhile; ?>
@@ -92,8 +97,19 @@ $results=mysqli_query($conn,$sql);
 	</div>
   
 
-<!-- 
-<p><?php echo $_SESSION['email']; ?></p> -->
+<!-- modalmodal -->
+  <div class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modalhead" style="text-align: center;">Provide Remarks</h3>
+            <input type="hidden" id="remarksstatus">
+            <input type="hidden" id="chargesheetnum">
+            <textarea name="" id="remarks" placeholder="write here..."></textarea>
+            <small id="errormsg"></small>
+            <button id="modalbutton"></button>
+        </div>
+    </div>
+<!-- modalmodal -->
 
 
 
@@ -102,7 +118,101 @@ $results=mysqli_query($conn,$sql);
 
 <script type="text/javascript" src="../js/jquery.js"></script>
 
+<script type="text/javascript">	
+	$('#modalhead').html('');
+	$('#modalbutton').html('');
+	$("#remarksstatus").val("");
+	function Approve(value){
+		$("#chargesheetnum").val("");
+		$("#chargesheetnum").val(value);
+		$("#remarksstatus").val("Approved");
+		$('#modalhead').html('Provide Remarks');
 
+		$('#modalbutton').css('backgroundColor','#104179');
+		$('#modalbutton').html('Confirm Approval');
+		document.getElementById("remarks").value=null;
+		console.log(value);
+		$("#errormsg").html(" ");	
+		toggleModal();
+	}
+	function Reject(value){
+		$("#remarksstatus").val("Rejected");
+		$("#chargesheetnum").val(" ");
+		$("#chargesheetnum").val(value);
+		$('#modalhead').html('Provide Remarks');
+		$('#modalbutton').css('backgroundColor','#ef042f');
+		$('#modalbutton').html('Reject');
+		document.getElementById("remarks").value=null;
+		
+
+		console.log(value);
+		$("#errormsg").html(" ");			
+		toggleModal();
+	}
+
+
+	//modal button
+	$("#modalbutton").click(function(){
+		var remarks= $("#remarks").val();
+		var chargesheetnum= $("#chargesheetnum").val();
+		var status =$("#remarksstatus").val();
+
+
+		var data ={
+						remarks:remarks,
+						chargesheetnum:chargesheetnum,
+						status:status,
+						prosecutor:"<?php echo $_SESSION['email']; ?>"
+				};
+
+		if (remarks==""&&chargesheetnum==""&&status=="") {
+			$("#errormsg").text("Kindly Add atleast On sentence On the Text field");
+
+		}else{
+			$.ajax({
+				type:'POST',
+				url:'assets/chargestatus.php',
+				data:data,
+				success:function(response){
+					console.log(response);
+				},
+				error:function(response){
+					console.log(response);
+				}
+
+			});
+
+			console.log(data);
+		}
+
+
+      $("#chargesheetnum").val("  ");
+	});
+
+	//modal button
+
+
+
+// modal
+   var modal = document.querySelector(".modal");
+    //var trigger = document.querySelector(".trigger");
+    var closeButton = document.querySelector(".close-button");
+
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
+    // trigger.addEventListener("click", toggleModal);
+    closeButton.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
+// modal
+</script>
    
 
   </body>
