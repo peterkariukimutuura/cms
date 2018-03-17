@@ -108,3 +108,18 @@ small#errormsg{
     position: relative;
     top: -10px;
 }
+
+div#successfullyapproved{
+    text-align: center;
+    background-color: #08e808;
+    color: #ffffff;
+    padding: 15px;
+    margin-top: -11px;
+    margin-bottom: 5px;
+    position: absolute;
+    z-index: 20;
+    width: 66%;
+    top: 40%;
+    display: none;
+    margin-left: -11%;
+}

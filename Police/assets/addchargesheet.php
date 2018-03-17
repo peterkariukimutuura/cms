@@ -12,15 +12,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$idnumber=mysqli_real_escape_string($conn,validate($_POST['idnumber']));
 	$fullnames=mysqli_real_escape_string($conn,validate($_POST['fullnames']));
 	$gender=mysqli_real_escape_string($conn,validate($_POST['gender']));
-	$age=mysqli_real_escape_string($conn,validate($_POST['age']));
+	$dateofbirth=mysqli_real_escape_string($conn,validate($_POST['dateofbirth']));
 	$description=mysqli_real_escape_string($conn,validate($_POST['description']));
 	$dateofarrest=mysqli_real_escape_string($conn,validate($_POST['dateofarrest']));
 	$addedby=$_SESSION['username'];
 
 	
-	if (!empty($policetype)&&!empty($obnumber)&&!empty($idnumber)&&!empty($fullnames)&&!empty($gender)&&!empty($age)&&!empty($description)&&!empty($dateofarrest)) {
+	if (!empty($policetype)&&!empty($obnumber)&&!empty($idnumber)&&!empty($fullnames)&&!empty($gender)&&!empty($dateofbirth)&&!empty($description)&&!empty($dateofarrest)) {
 		
-		$sql="INSERT INTO `chargesheets` ( `policetype`, `ob`, `identitynumber`, `name`, `gender`, `age`, `charge`, `dateofarrest`, `sendstatus`,`addedby`) VALUES ('$policetype', '$obnumber', '$idnumber', '$fullnames', '$gender', '$age', '$description', '$dateofarrest', 'not-send','$addedby')";
+		$sql="INSERT INTO `chargesheets` ( `policetype`, `ob`, `identitynumber`, `name`, `gender`, `dateofbirth`, `charge`, `dateofarrest`, `sendstatus`,`addedby`) VALUES ('$policetype', '$obnumber', '$idnumber', '$fullnames', '$gender', '$dateofbirth', '$description', '$dateofarrest', 'not-send','$addedby')";
 
 		if (mysqli_query($conn,$sql)) {
 

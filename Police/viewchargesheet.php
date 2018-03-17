@@ -62,7 +62,7 @@ if ($results) {
         <th><small>OB Number</small></th>
         <th><small>ID Number</small></th>
         <th><small>Names</small></th>
-        <th><small>Age</small></th>
+        <th><small>Date Of Birth</small></th>
         <th><small>Charge</small></th>
         <th><small>Date of Arrest</small></th>
         <th><small>Action</small></th>
@@ -74,7 +74,7 @@ if ($results) {
         <td><small><?php echo $row['ob']; ?></small></td>
         <td><small><?php echo $row['identitynumber']; ?></small></td>
         <td><small><?php echo $row['name']; ?></small></td>
-        <td><small><?php echo $row['age']; ?></small></td>
+        <td><small><small><?php echo $row['dateofbirth']; ?></small></small></td>
         <td style="width: 30%;text-align: left;"><small><?php echo substr($row['charge'], 0,100); ?><br>
           <a href="view.php?id=<?php echo($row['id']); ?>">read more..</a></small></td>
         <td><small><?php echo $row['dateofarrest']; ?></small></td>

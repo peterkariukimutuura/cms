@@ -10,18 +10,26 @@ function validate($value) {
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-INSERT INTO `prosecutorremarks` (`id`, `prosecutor`, `chargesheet`, `remarks`, `status`) VALUES (NULL, NULL, NULL, NULL, '')
+// INSERT INTO `prosecutorremarks` (`id`, `prosecutor`, `chargesheet`, `remarks`, `status`) VALUES (NULL, NULL, NULL, NULL, '')
+	// {remarks: "Tsets", chargesheetnum: "30", status: "Approved", prosecutor: "karistheprosecutor@mailinator.com"}
 
 	$remarks=mysqli_real_escape_string($conn,validate($_POST['remarks']));
 	$chargesheetnum=mysqli_real_escape_string($conn,validate($_POST['chargesheetnum']));
 	$status=mysqli_real_escape_string($conn,validate($_POST['status']));
 	$prosecutor=mysqli_real_escape_string($conn,validate($_POST['prosecutor']));
+	$sendstatus='prosecutor-'.$status;
 	if (!empty($remarks)&&!empty($chargesheetnum)&&!empty($status)) {
 		# code...
 		$sql="INSERT INTO `prosecutorremarks` (`prosecutor`, `chargesheet`, `remarks`, `status`) 
-		VALUES ('$prosecutor', '$chargesheetnum', '$status', '$prosecutor')";
-		if (mysqli_query($sql,$results)) {
-			echo "success";
+		VALUES ('$prosecutor', '$chargesheetnum', '$remarks', '$prosecutor')";
+		if (mysqli_query($conn,$sql)) {
+
+			if (mysqli_query($conn,"UPDATE chargesheets SET sendstatus='$sendstatus' WHERE id='$chargesheetnum'")) {
+				echo "success";
+			}else{
+				echo mysqli_error($conn);
+			}
+			
 		}else{
 			//echo "failed";
 			echo mysqli_error($conn);

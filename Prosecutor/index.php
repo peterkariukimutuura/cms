@@ -54,6 +54,10 @@ $results=mysqli_query($conn,$sql);
 		</div>
 		<div class="areatwo">
 			<h2 style="text-align:  center;">Available Charge Sheets That Requires Your Approval.</h2>
+
+			<div id="successfullyapproved" style="">
+				Successfully Approved
+			</div>
 	
 			<?php if(mysqli_num_rows($results)>0): ?>
 			<table>
@@ -69,7 +73,7 @@ $results=mysqli_query($conn,$sql);
 					<tr>
 						<td><small><?php echo $row['id']; ?></small></td>
 						<td><small><?php echo $row['name']; ?></small></td>
-						<td><small><?php echo $row['age']; ?></small></td>
+						<td><small><?php echo $row['dateofbirth']; ?></small></td>
 						<td style="width: 45%;"><small><?php echo substr($row['charge'], 0,100); ?><br>
 							<a href="">read more...</a>
 						 </small></td>
@@ -169,12 +173,31 @@ $results=mysqli_query($conn,$sql);
 			$("#errormsg").text("Kindly Add atleast On sentence On the Text field");
 
 		}else{
+			toggleModal();
+			// console.log(data);
+			// return;
 			$.ajax({
 				type:'POST',
 				url:'assets/chargestatus.php',
 				data:data,
 				success:function(response){
-					console.log(response);
+					if (response=="success") {
+						
+							if (data.status=="Rejected") {
+								$('#successfullyapproved').css({'display':'inherit','backgroundColor':'#ef042f'});
+								$('#successfullyapproved').html('Successfully Rejected');
+							}
+						$('#successfullyapproved').css('display','inherit');
+						$('body').css('background-color', '#0000006b');
+
+						setTimeout(() => {
+						  location.reload();
+						}, 2000);
+
+						
+					}else{
+						alert('Kindly Refresh The Page!');
+					}
 				},
 				error:function(response){
 					console.log(response);

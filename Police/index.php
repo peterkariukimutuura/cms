@@ -113,15 +113,8 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
          </select>
        </div><br>
        <div>
-         <label for="Age">Age</label><br>
-         <select name="age" id="age" required>
-           <option value="">choose</option>
-           <?php 
-           for ($i=0; $i <200 ; $i++) { 
-             echo "<option value='".$i."'>".$i."</option>";
-           }
-            ?>
-         </select>
+         <label for="dateofbirth">Date Of Birth</label><br>
+         <input type="date" name="dateofbirth" id="dateofbirth">
        </div><br>
        <div>
          <label for="Charge">Charge</label><br>

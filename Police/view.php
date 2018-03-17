@@ -97,7 +97,7 @@ if (isset($_GET['id'])) {
       </tr>
       <tr>
         <td>Age</td>
-        <td><?php echo $row['age']; ?></td>
+        <td><?php echo $row['dateofbirth']; ?></td>
       </tr>
       <tr>
         <td>Date Of Arrest</td>
