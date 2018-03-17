@@ -1,0 +1,59 @@
+body{
+	margin-bottom: 50px;
+}
+div.holder{
+	width: 93%;
+	margin: 0px auto;
+
+}
+
+div.areaone{
+	width: inherit;
+	height: 415px;
+}
+
+div#subareone{
+	width: 50%;
+	float: left;
+}
+div#subareaone-1{
+	text-align: center;
+	width: 50%;
+	float: left;
+}
+
+img#kenyajudiciarysystem{
+	    width: 98%;
+    margin-top: 39px;
+    margin-left: 43px;
+    height: 340px;
+}
+
+div.areathree{
+	text-align: center;
+	 height: 576px;
+
+}
+
+
+
+a#linksspecific{
+	text-decoration: none;
+	cursor: pointer;
+}
+a#linksspecific:hover{
+	text-decoration-style: dotted;
+	color: #0e3667;
+}
+div.areathreeone,
+div.areathreetwo,
+div.areathreethree{
+	width: 30%;
+	float: left;
+}
+div.areathreeone{
+	    margin-right: 30px;
+}
+div.areathreetwo{
+	    margin-right: 30px;
+}
