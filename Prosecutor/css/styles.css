@@ -123,3 +123,21 @@ div#successfullyapproved{
     display: none;
     margin-left: -11%;
 }
+
+div#viewallchargesheetsreviewed{
+        width: 200px;
+    margin: 20px auto;
+    background-color: #98ad98;
+    padding: 30px;
+    border-radius: 30px;
+}
+
+a#allreviews{
+        color: #0268bf;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a#allreviews:hover{
+        color: #800707;
+}

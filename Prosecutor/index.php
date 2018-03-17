@@ -51,6 +51,10 @@ $results=mysqli_query($conn,$sql);
 			<h1>Prosecuter Department</h1><br>
 			<img style="width: 70%;" src="images/logo.png" alt="The Prosecutor">
 			<p>Welcome <?php echo $_SESSION['username']; ?>, You are now logged In as <?php echo $_SESSION['occupation']; ?></p><br>
+			<div id="viewallchargesheetsreviewed">
+				view Charge Sheets Reviewed <br>
+				<a id="allreviews" href="viewallchargesheet.php">View All Reviewed</a>
+			</div>
 		</div>
 		<div class="areatwo">
 			<h2 style="text-align:  center;">Available Charge Sheets That Requires Your Approval.</h2>
@@ -75,7 +79,7 @@ $results=mysqli_query($conn,$sql);
 						<td><small><?php echo $row['name']; ?></small></td>
 						<td><small><?php echo $row['dateofbirth']; ?></small></td>
 						<td style="width: 45%;"><small><?php echo substr($row['charge'], 0,100); ?><br>
-							<a href="">read more...</a>
+							<a href="view.php?id=<?php echo($row['id']); ?>">read more..</a></small></td>
 						 </small></td>
 						<td><small><?php echo $row['dateofarrest']; ?></small></td>
 						<td style="text-align: center;">
