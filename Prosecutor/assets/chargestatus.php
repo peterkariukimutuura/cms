@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (!empty($remarks)&&!empty($chargesheetnum)&&!empty($status)) {
 		# code...
 		$sql="INSERT INTO `prosecutorremarks` (`prosecutor`, `chargesheet`, `remarks`, `status`) 
-		VALUES ('$prosecutor', '$chargesheetnum', '$remarks', '$prosecutor')";
+		VALUES ('$prosecutor', '$chargesheetnum', '$remarks', '$status')";
 		if (mysqli_query($conn,$sql)) {
 
 			if (mysqli_query($conn,"UPDATE chargesheets SET sendstatus='$sendstatus' WHERE id='$chargesheetnum'")) {

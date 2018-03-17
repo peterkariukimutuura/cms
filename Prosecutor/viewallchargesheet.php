@@ -12,6 +12,24 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 }
 
 
+$sql = "SELECT chargesheets.charge,chargesheets.name,chargesheets.dateofarrest,prosecutorremarks.remarks
+,prosecutorremarks.status
+  FROM  chargesheets INNER JOIN prosecutorremarks ON chargesheets.id=prosecutorremarks.chargesheet";
+  $results=mysqli_query($conn,$sql);
+  // if ($results) {
+  //   if (mysqli_num_rows($results)>0) {
+  //     while ($row=mysqli_fetch_assoc($results)) {
+  //       echo $row['charge'] .'<br>';
+  //     }
+  //   }else{
+  //     echo "nothing!";
+  //   }
+    
+  // }else{
+  //   echo mysqli_error($conn);
+  // }
+
+
 
 
  ?>
@@ -40,15 +58,50 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
   <body>
 	<div id="navbar">
 		<a  id="heading" class="pull-left">Court Case System</a>
-    <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">Charge Sheet View</h1>
+    <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">View Reviews</h1>
     <a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
-  <a href="index.php" id="goback">Go Back</a>
-
+  <a style="padding: 8px;" href="index.php" id="goback">Go Back</a>
+<br>
+<br>
 
   <div class="content">
-    
+    <?php if($results): ?>
+      <?php if(mysqli_num_rows($results)>0): ?>
+        
+        <?php while($row=mysqli_fetch_assoc($results)): ?>
+          <div style="width: 80%;margin: 10px auto; padding: 10px;background-color: #d0e0d0;">
+            <h3> <small style="color: green">Suspect</small> <?php echo $row['name']; ?></h3>
+            <div style="padding: 15px;background-color: #f9f9f9;">
+              <small style="color: green">Charge</small>
+              <p style="margin: 0px;padding: 0px;"> <?php echo  $row['charge']; ?>
+            </div>
+            <div style="padding: 15px;background-color: #f9f9f9;">
+              <small style="color: green">Charge Sheet Status</small>
+              <p style="margin: 0px;padding: 0px;"> <?php echo  $row['status']; ?>
+            </div>
+            <div style="padding: 15px;background-color: #f9f9f9;">
+              <small style="color: green">Prosecutor Remarks</small>
+              <p style="margin: 0px;padding: 0px;"> <?php echo  $row['remarks']; ?>
+            </div>
+
+            </p>
+          </div>
+
+        <?php endwhile; ?>
+
+        <?php else: ?>
+          <div style="width: 300px;margin: 50px auto;padding: 20px;    background: #11a230;text-align: center;color: white;">
+            There Are No Records Of Past Reviews .
+          </div>
+      <?php endif; ?>
+    <?php else: ?>
+      <div style="width: 300px;margin: 50px auto;padding: 20px;background: red;text-align: center;color: white;">
+        Error. Kindly Refresh The Page
+      </div>
+    <?php endif; ?>
+
   </div><br><br><br>
 
 
