@@ -89,7 +89,6 @@ a#goback{
     padding: 5px;
     background-color: #3333334f;
     position: fixed;
-    /* margin-bottom: 196px; */
-    top: 30%;
+        top: 14%;
     color: black;
 }
