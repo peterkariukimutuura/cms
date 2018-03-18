@@ -1,0 +1,95 @@
+body{
+	margin-bottom: 100px;
+}
+h1#headlink{
+	    left: 21%;
+   
+    display: block;
+    height: 59px;
+    position: absolute;
+    margin-top: 11px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 1.7;
+}
+a#profilepage{
+	    float: right;
+    position: absolute;
+    left: 67%;
+    text-decoration: none;
+    padding: 12px;
+    
+    color: #fff;
+    margin-top: 16px;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+div.content{
+	width: 90%;
+	margin: 0px auto;
+	    height: 635px;
+
+}
+
+
+
+div.contentsectionone{
+	width: 50%;
+	text-align: center;
+	float: left;
+}
+
+div.contentsectiontwo{
+	width: 50%;
+	float: left;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #5f474a; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+}
+
+
+
+a#addcourtrecord{
+    float: right;
+    text-decoration: none; 
+    padding: 6px;
+    background-color: #36e036;
+    color: white;
+    font-size: 12px;
+    display: block;
+}
+
+
+a#addcourtrecord:hover{
+    background-color: #009e00;
+}
+
+a#goback{
+        text-decoration: none;
+    padding: 5px;
+    background-color: #3333334f;
+    position: fixed;
+    /* margin-bottom: 196px; */
+    top: 30%;
+    color: black;
+}

@@ -15,19 +15,9 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 $sql = "SELECT chargesheets.charge,chargesheets.name,chargesheets.dateofarrest,prosecutorremarks.remarks
 ,prosecutorremarks.status
   FROM  chargesheets INNER JOIN prosecutorremarks ON chargesheets.id=prosecutorremarks.chargesheet";
+  
   $results=mysqli_query($conn,$sql);
-  // if ($results) {
-  //   if (mysqli_num_rows($results)>0) {
-  //     while ($row=mysqli_fetch_assoc($results)) {
-  //       echo $row['charge'] .'<br>';
-  //     }
-  //   }else{
-  //     echo "nothing!";
-  //   }
-    
-  // }else{
-  //   echo mysqli_error($conn);
-  // }
+
 
 
 

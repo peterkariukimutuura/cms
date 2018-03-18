@@ -41,9 +41,9 @@ $results=mysqli_query($conn,$sql);
 
   <body>
 	<div id="navbar">
-		<a id="heading" class="pull-left">Court Case System</a>
+		<a id="heading" href="../" class="pull-left" style="text-decoration: none;">Court Case System</a>
 		<h1 id="headlink">Home</h1>
-		<a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
+		<a style="left: 67%;" id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 86%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
 	<div class="contentholder">
