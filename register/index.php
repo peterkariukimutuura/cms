@@ -87,10 +87,10 @@ include 'assets/register.php';
 				<!-- <input type="text" placeholder="add occupation here" name="occupation"> -->
 				<select id="occupation" class="form-control" name="occupation">
 					<option value="">Choose One</option>
-					<option value="Prosecutor">Prosecutor</option>
-					<option value="Clerk">Clerk</option>
-					<option value="Judge/Magistrate">Judge/Magistrate</option>
-					<option value="Police">Police</option>
+					<option value="1">Prosecutor</option>
+					<option value="3">Clerk</option>
+					<option value="4">Judge/Magistrate</option>
+					<option value="2">Police</option>
 				</select>
 				<small class="occupation" id="errormessage"></small>
 			</div><br>

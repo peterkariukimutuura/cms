@@ -87,8 +87,43 @@ a#addcourtrecord:hover{
 a#goback{
         text-decoration: none;
     padding: 5px;
-    background-color: #3333334f;
+    background-color: #a70000;
     position: fixed;
         top: 14%;
-    color: black;
+    color: #fff;
+}
+
+
+a#viewmore{
+    text-decoration: none;
+    padding: 6px;
+    background-color: green;
+    color: white;
+}
+a#addcourtrecordfromview{
+    float: right;
+text-decoration: none;
+margin-left: 80%;
+position: absolute;
+padding: 6px;
+background-color: green;
+color: white;
+}
+
+div#viewallchargesheetsreviewed{
+        width: 200px;
+    margin: 20px auto;
+    background-color: #98ad98;
+    padding: 30px;
+    border-radius: 30px;
+}
+
+a#allreviews{
+        color: #0268bf;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a#allreviews:hover{
+        color: #800707;
 }

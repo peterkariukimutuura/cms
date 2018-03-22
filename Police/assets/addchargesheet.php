@@ -1,5 +1,6 @@
 <?php 
-
+session_start();
+include '../../register/assets/databaseconnection.php';
 function validate($value) {
   $value = trim($value);
   $value = stripslashes($value);
@@ -23,14 +24,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$sql="INSERT INTO `chargesheets` ( `policetype`, `ob`, `identitynumber`, `name`, `gender`, `dateofbirth`, `charge`, `dateofarrest`, `sendstatus`,`addedby`) VALUES ('$policetype', '$obnumber', '$idnumber', '$fullnames', '$gender', '$dateofbirth', '$description', '$dateofarrest', 'not-send','$addedby')";
 
 		if (mysqli_query($conn,$sql)) {
-
-			$_SESSION['successmessage']="A new Charge Sheet Has Been Successfully Created!";
+			// $id= mysqli_insert_id($conn);
+			// $ob=$id+1;
+			// if (mysqli_query($conn,"UPDATE chargesheets set ob='$ob' WHERE id='$id' ")) {
+				// $_SESSION['successmessage']="A new Charge Sheet Has Been Successfully Created!";
+				echo  "A new Charge Sheet Has Been Successfully Created!";
+			// }
+			// mysqli_close($conn);
 		}else{
-			$_SESSION['errormessage']=mysqli_error($conn);
+			// $_SESSION['errormessage']=mysqli_error($conn);
+			echo mysqli_error($conn);
+
 		}
 
 	}else{
-		$_SESSION['errormessage']="Could Not Insert Charge Details:Make Sure All Required Fields Have Values!";
+		// $_SESSION['errormessage']="Could Not Insert Charge Details:Make Sure All Required Fields Have Values!";
+		echo "Could Not Insert Charge Details:Make Sure All Required Fields Have Values!";
 	}
 
 

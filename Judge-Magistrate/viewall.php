@@ -9,12 +9,14 @@ include '../register/assets/databaseconnection.php';
 if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SESSION['email'])) {
   $_SESSION['errormessage']="Kindly login To Proceed!";
   header("location:http://localhost/courtcasesystem/login/");
+}else{
+    if ($_SESSION['occupation']!=="Judge/Magistrate") {
+      $_SESSION['errormessage']="Kindly login With A Judge/Magistrate Account to Proceed!";
+      header("location:http://localhost/courtcasesystem/login/");
+    }
 }
 
-
-$sql = "SELECT chargesheets.charge,chargesheets.name,chargesheets.dateofarrest,prosecutorremarks.remarks
-,prosecutorremarks.status
-  FROM  chargesheets INNER JOIN prosecutorremarks ON chargesheets.id=prosecutorremarks.chargesheet";
+$sql = "SELECT * FROM courtrecord";
   
   $results=mysqli_query($conn,$sql);
 
@@ -35,7 +37,7 @@ $sql = "SELECT chargesheets.charge,chargesheets.name,chargesheets.dateofarrest,p
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Prosecutor</title>
+    <title> Judges / Magistrate</title>
 	
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -48,7 +50,7 @@ $sql = "SELECT chargesheets.charge,chargesheets.name,chargesheets.dateofarrest,p
   <body>
 	<div id="navbar">
 		<a  id="heading" class="pull-left">Court Case System</a>
-    <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">View Reviews</h1>
+    <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">View All Cases</h1>
     <a id="profilepage" href="#">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
@@ -62,22 +64,36 @@ $sql = "SELECT chargesheets.charge,chargesheets.name,chargesheets.dateofarrest,p
         
         <?php while($row=mysqli_fetch_assoc($results)): ?>
           <div style="width: 80%;margin: 10px auto; padding: 10px;background-color: #d0e0d0;">
-            <h3> <small style="color: green">Suspect</small> <?php echo $row['name']; ?></h3>
+            <h3> <small style="color: green">Case Number</small> <?php echo $row['casenumber']; ?></h3>
             <div style="padding: 15px;background-color: #f9f9f9;">
-              <small style="color: green">Charge</small>
-              <p style="margin: 0px;padding: 0px;"> <?php echo  $row['charge']; ?>
-            </div>
-            <div style="padding: 15px;background-color: #f9f9f9;">
-              <small style="color: green">Charge Sheet Status</small>
-              <p style="margin: 0px;padding: 0px;"> <?php echo  $row['status']; ?>
-            </div>
-            <div style="padding: 15px;background-color: #f9f9f9;">
-              <small style="color: green">Prosecutor Remarks</small>
-              <p style="margin: 0px;padding: 0px;"> <?php echo  $row['remarks']; ?>
-            </div>
+              <small style="color: green">Charge Sheet &nbsp&nbsp&nbsp
+                <span style="color: black;">
+                <a id="viewmore" href="view.php?id=<?php echo $row['chargesheet']; ?>" >View More</a>
+              </span>
+              </small>,&nbsp
+              <small style="color: green">Court <span style="color: black;"><?php echo  $row['court']; ?></span></small>
+              ,&nbsp
+              <small style="color: green">Plea Date
+              <span style="color: black;"><?php echo  $row['pleaDate']; ?></span>
+              </small>,&nbsp
+              <small style="color: green">Plea Status &nbsp
+              <span style="color: black;"><?php echo  $row['plea_status']; ?></span>
+              </small>,&nbsp
+              <small style="color: green">Hearing Date
+               <span style="color: black;"><?php echo  $row['hearingDate']; ?></span>
+              </small>,&nbsp <br>  
+              <small style="color: green">Judges Notes
+                 <span style="color: black;"> <?php echo  $row['judgesNotes']; ?></span>
+              </small><br>
+&nbsp
+              <small style="color: green">Sentence
+               <span style="color: black;"><?php echo  $row['sentence']; ?></span>
+              </small>,&nbsp    <small style="color: green">Case Status
+               <span style="color: black;"><?php echo  $row['caseStatus']; ?></span>
+              </small>&nbsp.
+           </div>
 
-            </p>
-          </div>
+         </div>
 
         <?php endwhile; ?>
 

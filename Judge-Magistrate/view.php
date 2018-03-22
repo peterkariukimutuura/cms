@@ -9,6 +9,11 @@ include '../register/assets/databaseconnection.php';
 if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SESSION['email'])) {
   $_SESSION['errormessage']="Kindly login To Proceed!";
   header("location:http://localhost/courtcasesystem/login/");
+}else{
+    if ($_SESSION['occupation']!=="Judge/Magistrate") {
+      $_SESSION['errormessage']="Kindly login With A Judge/Magistrate Account to Proceed!";
+      header("location:http://localhost/courtcasesystem/login/");
+    }
 }
 
 $id=4;
@@ -22,18 +27,18 @@ if (isset($_GET['id'])) {
       if (mysqli_num_rows($results)>0) {
         $row=mysqli_fetch_assoc($results);
       }else{
-        header("location:http://localhost/courtcasesystem/Prosecutor");
+        header("http://localhost/courtcasesystem/Judge-Magistrate/index.php");
       }
       
     }else{
       //echo mysqli_error($conn);
     }
   }else{
-    header("location:http://localhost/courtcasesystem/Prosecutor");
+    header("http://localhost/courtcasesystem/Judge-Magistrate/index.php");
   }
   
 }else{
-  header("location:http://localhost/courtcasesystem/Prosecutor");
+  header("http://localhost/courtcasesystem/Judge-Magistrate/index.php");
 }
 
 
@@ -52,11 +57,12 @@ if (isset($_GET['id'])) {
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Prosecutor</title>
+    <title>Judge-Magistrate</title>
 	
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="../register/css/stylesheet.css">
+   <link rel="stylesheet" href="css/stylesheet.css">
    <link rel="stylesheet" href="../Police/css/styles.css">
 
 
@@ -68,8 +74,9 @@ if (isset($_GET['id'])) {
     <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">Charge Sheet View</h1>
     <a id="profilepage" href="#">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
-	</div>
-  <a href="index.php" id="goback">Go Back</a>
+	</div><br>
+  <a href="index.php" id="goback" style="top: 16%;">Go Back</a>
+  <a id="addcourtrecordfromview" href="addcourtrecord.php?id=<?php echo $row['id']; ?>" >Add a Court Record</a>
 
 
   <div class="content">
@@ -77,44 +84,58 @@ if (isset($_GET['id'])) {
     <table id="content">
       <tr>
         <td>Police Type</td>
-        <td><?php echo $row['policetype']; ?></td>
+        <td style="text-align: left;"><?php echo $row['policetype']; ?></td>
       </tr>
       <tr>
         <td>Added By</td>
-        <td><?php echo $row['addedby']; ?></td>
+        <td style="text-align: left;"><?php echo $row['addedby']; ?></td>
       </tr>
       <tr>
         <td>Full names</td>
-        <td><?php echo $row['name']; ?></td>
+        <td style="text-align: left;"><?php echo $row['name']; ?></td>
       </tr>
       <tr>
         <td>Identity Card Number</td>
-        <td><?php echo $row['identitynumber']; ?></td>
+        <td style="text-align: left;"><?php echo $row['identitynumber']; ?></td>
       </tr>
       <tr>
         <td>Gender</td>
-        <td><?php echo $row['gender']; ?></td>
-      </tr>
-      <tr>
-        <td>Age</td>
-        <td><?php echo $row['dateofbirth']; ?></td>
+        <td style="text-align: left;"><?php echo $row['gender']; ?></td>
       </tr>
       <tr>
         <td>Date Of Arrest</td>
-        <td><?php echo $row['gender']; ?></td>
+        <td style="text-align: left;"><?php echo $row['dateofbirth']; ?></td>
       </tr>
       <tr>
-        <td>Gender</td>
-        <td><?php echo $row['gender']; ?></td>
+        <td>Date Of Arrest</td>
+        <td style="text-align: left;"><?php echo $row['dateofarrest']; ?></td>
+      </tr>
+
+      <tr>
+        <td>Charge</td>
+        <td style="text-align: left;"><small><?php echo $row['charge']; ?></small></td>
       </tr>
       <tr>
         <td>Prosecutor Aproval</td>
-        <td><?php echo $row['sendstatus']; ?></td>
+        <td style="text-align: left;"><?php
+          if($row['sendstatus']=="prosecutor-Approved"){
+            echo "<i style='color:green'>Approved</i>";
+          }else if($row['sendstatus']=="Rejected"){
+              echo "<i style='color:red'>Rejected</i>";
+          }else{
+            echo $row['sendstaus'];
+          }
+        ?></td>
       </tr>
-      <tr>
-        <td>Charge</td>
-        <td style="text-align: left;"><?php echo $row['charge']; ?></td>
-      </tr>
+      <?php if($row['sendstatus']!=="not-send"): ?>
+        <?php $id=$row["id"]; ?>
+          <?php if($remarks=mysqli_fetch_assoc(mysqli_query($conn,"SELECT remarks FROM prosecutorremarks WHERE chargesheet='$id'"))): ?>
+          <tr>
+            <td>Prosecutor Remarks</td>
+            <td style="text-align: left;"><small><?php echo $remarks['remarks']; ?></small></td>
+          </tr>
+        <?php endif; ?>
+    <?php endif; ?>
     </table>    
   </div><br><br><br>
 

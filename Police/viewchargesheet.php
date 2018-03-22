@@ -4,7 +4,7 @@ session_start();
 //include the connection from the database
 
 include '../register/assets/databaseconnection.php';
-include 'assets/addchargesheet.php';
+
 
 if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SESSION['email'])) {
   $_SESSION['errormessage']="Kindly login To Proceed!";
@@ -49,7 +49,7 @@ if ($results) {
 	<div id="navbar">
 		<a  id="heading" class="pull-left">Court Case System</a>
     <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">Charge Sheets Inventory</h1>
-    <a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
+    <a id="profilepage" href="#">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
   <a href="index.php" id="goback">Go Back</a>
@@ -83,9 +83,13 @@ if ($results) {
            if ($row['sendstatus']=='not-send') {
             echo "<button class='sendtoprosecutor".$row['id']."' id='sendtoprosecutor' onclick='sendtoprosecutor(\"".$row['id']."\")' type='button'>Send to Prosecutor</button>";
            }else if($row['sendstatus']=='sent to prosecutor'){
-            echo "<small style='color:green'>Waiting Prosecutor Approval</small>";
-           }else{
-            echo "<small style='color:red'>Declined By Prosecutor</small>";
+            echo "<small style='color:blue'>Waiting Prosecutor Approval</small>";
+           }else if ($row['sendstatus']=="prosecutor-Approved") {
+            echo "<small style='color:green'>Approved By Prosecutor</small>";
+             # code...
+           }else if ($row['sendstatus']=="prosecutor-Rejected") {
+            echo "<small style='color:Red'>Rejected By Prosecutor</small>";
+             # code...
            }
          ?></small></td>
       </tr>

@@ -76,7 +76,7 @@ div.footer{
 }
 
 
-textarea#chargesheet{
+textarea#description{
 	    width: 417px;
     resize: none;
     text-indent: 8px;
@@ -136,7 +136,16 @@ button#sendtoprosecutor:hover{
     cursor: pointer;
 }
 
+
 a#goback{
+        text-decoration: none;
+    padding: 5px;
+    background-color: #a70000;
+    position: fixed;
+        top: 14%;
+    color: #fff;
+}
+/*a#goback{
 	    position: absolute;
 	        background-color: #e8bfb2;
     padding: 0px;
@@ -146,7 +155,7 @@ a#goback{
     font-size: 15px;
     color: #001786;
     text-decoration: none;
-}
+}*/
 
 a#goback:hover{
 	    background-color: #7fb32c;
@@ -167,4 +176,25 @@ table#content td{
 
 table#content tr:nth-child(odd){
 	    background-color: #e4e0e0;
+}
+
+button#generateob{
+    width: 196px;
+    float: left;
+    font-size: 15px;
+    color: #000080;
+    padding: 9.5px;
+    margin-top: 5px;
+    background-color: #6ce4ff;
+    margin-left: 23px;
+        outline: none;
+}
+
+input#obnumber{
+    width: 230px;
+    float: left;
+    height: 34px;
+    background-color: #f53333;
+    border: none;
+    color: #fff;
 }

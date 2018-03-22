@@ -21,24 +21,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			if ($row['password']==$password) {
 
 				$_SESSION['username']=$row['username'];
-				$_SESSION['occupation']=$row['occupation'];
+				// $_SESSION['occupation']=$row['occupation'];
 				$_SESSION['email']=$row['email'];
 				
-				if ($row['occupation']=="Prosecutor") {
+				if ($row['occupation']=="1") {
+					$_SESSION['occupation']="Prosecutor";
 					header("location:http://localhost/courtcasesystem/Prosecutor/");
 				}
 
-				if ($row['occupation']=="Police") {
+				if ($row['occupation']=="2") {
+					$_SESSION['occupation']="Police";
 					header("location:http://localhost/courtcasesystem/Police/");
 
 				}
 
-				if ($row['occupation']=="Clerk") {
+				if ($row['occupation']=="3") {
+					$_SESSION['occupation']="Clerk";
 					header("location:http://localhost/courtcasesystem/Clerk/");
 
 				}
 
-				if ($row['occupation']=="Judge/Magistrate") {
+				if ($row['occupation']=="4") {
+					$_SESSION['occupation']="Judge/Magistrate";
 					header("location:http://localhost/courtcasesystem/Judge-Magistrate/");
 					
 				}

@@ -4,7 +4,7 @@ session_start();
 //include the connection from the database
 
 include '../register/assets/databaseconnection.php';
-include 'assets/addchargesheet.php';
+
 
 if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SESSION['email'])) {
   $_SESSION['errormessage']="Kindly login To Proceed!";
@@ -66,7 +66,7 @@ if (isset($_GET['id'])) {
 	<div id="navbar">
 		<a  id="heading" class="pull-left">Court Case System</a>
     <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">Charge Sheet View</h1>
-    <a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
+    <a id="profilepage" href="#">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
   <a href="viewchargesheet.php" id="goback">Go Back</a>
@@ -77,44 +77,58 @@ if (isset($_GET['id'])) {
     <table id="content">
       <tr>
         <td>Police Type</td>
-        <td><?php echo $row['policetype']; ?></td>
+        <td style="text-align: left;"><?php echo $row['policetype']; ?></td>
       </tr>
       <tr>
         <td>Added By</td>
-        <td><?php echo $row['addedby']; ?></td>
+        <td style="text-align: left;"><?php echo $row['addedby']; ?></td>
       </tr>
       <tr>
         <td>Full names</td>
-        <td><?php echo $row['name']; ?></td>
+        <td style="text-align: left;"><?php echo $row['name']; ?></td>
       </tr>
       <tr>
         <td>Identity Card Number</td>
-        <td><?php echo $row['identitynumber']; ?></td>
+        <td style="text-align: left;"><?php echo $row['identitynumber']; ?></td>
       </tr>
       <tr>
         <td>Gender</td>
-        <td><?php echo $row['gender']; ?></td>
-      </tr>
-      <tr>
-        <td>Age</td>
-        <td><?php echo $row['dateofbirth']; ?></td>
+        <td style="text-align: left;"><?php echo $row['gender']; ?></td>
       </tr>
       <tr>
         <td>Date Of Arrest</td>
-        <td><?php echo $row['gender']; ?></td>
+        <td style="text-align: left;"><?php echo $row['dateofbirth']; ?></td>
       </tr>
       <tr>
-        <td>Gender</td>
-        <td><?php echo $row['gender']; ?></td>
+        <td>Date Of Arrest</td>
+        <td style="text-align: left;"><?php echo $row['dateofarrest']; ?></td>
+      </tr>
+
+      <tr>
+        <td>Charge</td>
+        <td style="text-align: left;"><small><?php echo $row['charge']; ?></small></td>
       </tr>
       <tr>
         <td>Prosecutor Aproval</td>
-        <td><?php echo $row['sendstatus']; ?></td>
+        <td style="text-align: left;"><?php
+          if($row['sendstatus']=="prosecutor-Approved"){
+            echo "<i style='color:green'>Approved</i>";
+          }else if($row['sendstatus']=="prosecutor-Rejected"){
+              echo "<i style='color:red'>Rejected</i>";
+          }else{
+            echo $row['sendstaus'];
+          }
+        ?></td>
       </tr>
-      <tr>
-        <td>Charge</td>
-        <td style="text-align: left;"><?php echo $row['charge']; ?></td>
-      </tr>
+      <?php if($row['sendstatus']!=="not-send"): ?>
+        <?php $id=$row["id"]; ?>
+          <?php if($remarks=mysqli_fetch_assoc(mysqli_query($conn,"SELECT remarks FROM prosecutorremarks WHERE chargesheet='$id'"))): ?>
+          <tr>
+            <td>Prosecutor Remarks</td>
+            <td style="text-align: left;"><small><?php echo $remarks['remarks']; ?></small></td>
+          </tr>
+        <?php endif; ?>
+    <?php endif; ?>
     </table>    
   </div><br><br><br>
 

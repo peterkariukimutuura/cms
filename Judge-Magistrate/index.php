@@ -8,7 +8,14 @@ include '../register/assets/databaseconnection.php';
 if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SESSION['email'])) {
   $_SESSION['errormessage']="Kindly login To Proceed!";
   header("location:http://localhost/courtcasesystem/login/");
+}else{
+    if ($_SESSION['occupation']!=="Judge/Magistrate") {
+      $_SESSION['errormessage']="Kindly login With A Judge/Magistrate Account to Proceed!";
+      header("location:http://localhost/courtcasesystem/login/");
+    }
 }
+
+
 
 
 $sql = "SELECT  chargesheets.charge,chargesheets.id ,chargesheets.name,chargesheets.dateofarrest,prosecutorremarks.remarks
@@ -51,7 +58,7 @@ $results=mysqli_query($conn,$sql);
             <h1 id="headlink">
                 Home
             </h1>
-            <a href="profile.php" id="profilepage">
+            <a href="#" id="profilepage">
                 Welcome,
                 <?php echo $_SESSION['username']; ?>
             </a>
@@ -77,6 +84,10 @@ $results=mysqli_query($conn,$sql);
                         <p>
                             <?php echo $_SESSION['email']; ?>
                         </p>
+
+            <div id="viewallchargesheetsreviewed">
+                <a id="allreviews" href="viewall.php">View Court Records</a>
+            </div>
                    
                
             </div>
@@ -120,7 +131,11 @@ $results=mysqli_query($conn,$sql);
                             <p style="margin: 0px;padding: 0px;">
                                 <?php echo  $row['remarks']; ?>
                             </p>
-                        </div>
+                        </div><br>
+                        <div>
+                             <a id="viewmore" href="view.php?id=<?php echo $row['id']; ?>" >View More</a>
+                            
+                        </div><br>
                     </div>
                     <?php endwhile; ?>
                     <?php else: ?>

@@ -3,16 +3,20 @@ session_start();
 
 //include the connection from the database
 
-include '../register/assets/databaseconnection.php';
-include 'assets/addchargesheet.php';
+
+// include 'assets/addchargesheet.php';
 
 if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SESSION['email'])) {
   $_SESSION['errormessage']="Kindly login To Proceed!";
   header("location:http://localhost/courtcasesystem/login/");
+}else{
+  if ($_SESSION['occupation']!=="Police") {
+    $_SESSION['errormessage']="Kindly login With A Police Account to Proceed To Proceed!";
+    header("location:http://localhost/courtcasesystem/login/");
+  }
 }
 
- //$_SESSION['successmessage']="Could Not Insert Charge Details:Make Sure All Required Fields Have Values";
-// $_SESSION['errormessage']="welcome Home!";
+
 
  ?>
 <!DOCTYPE html>
@@ -40,7 +44,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 	<div id="navbar">
 		<a id="heading" class="pull-left">Court Case System</a>
     <h1 id="headlink">Home</h1>
-    <a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
+    <a id="profilepage" href="#">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
   <div class="sectionone">
@@ -63,26 +67,13 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
       <h2 style="text-align: center;">Add Charge Sheet</h2>
 
     <!-- this is just simple php for checking  verification messages -->
-
-    <?php if(!empty($_SESSION['successmessage'])): ?>
-      <div id="successmessage">
-        <?php echo $_SESSION['successmessage']; ?>
-        <!-- User Successfully Registered! Proceed to login -->
+     <div id="successmessage" style="display: none;">
       </div><br>
-      <?php unset($_SESSION['successmessage']); ?>
-    <?php endif; ?>
 
 
-
-    <?php if(!empty($_SESSION['errormessage'])): ?>
-      <div id="errormessage">
-        <?php echo $_SESSION['errormessage']; ?>
-      </div><br>  
-      <?php unset($_SESSION['errormessage']); ?>
-    <?php endif; ?>
     <!-- this is just simple php for checking  verification messages -->
 
-     <form id="chargesheet" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+     <form id="chargesheet" method="post" onsubmit=" return false;" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
        <div>
          <label for="Police Type">Police Type</label>
          <select name="policetype" id="policetype" required>
@@ -92,12 +83,14 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
          </select>
        </div><br>
        <div>
-         <label for="Occurrence Book Number">Occurrence Book Number</label>
-         <input type="text" id="obnumber" name="obnumber" placeholder="Occurrence Book Number" maxlength="20" required>
+         <label for="Occurrence Book Number">Generate OB Number</label><br>
+         <button type="button" id="generateob" onclick="GenerateOb();">Click Here</button>
+         <input type="text" id="obnumber" name="obnumber"  disabled >
+         
        </div><br>
        <div>
          <label for="ID Number">ID Number</label>
-         <input type="text" id="idnumber" name="idnumber" placeholder="Identity Card Number" maxlength="20" required>
+         <input type="number" id="idnumber" name="idnumber" placeholder="Identity Card Number" maxlength="20" required>
        </div><br>
        <div>
          <label for="Full Names">Full Names</label>
@@ -118,7 +111,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
        </div><br>
        <div>
          <label for="Charge">Charge</label><br>
-         <textarea id="chargesheet" name="description" placeholder="charge Description" required></textarea>
+         <textarea name="description" id="description" placeholder="charge Description" required></textarea>
        </div><br>
        <div>
         <label for="Date Of Arrest">Date Of Arrest</label><br>
@@ -126,7 +119,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 
          
        </div><br>
-       <button type="submit">Add Charge</button>
+       <button onclick="Validate()" type="submit">Add Charge</button>
 
      </form>
     </div>
@@ -142,8 +135,74 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 
 
 <script type="text/javascript" src="../js/jquery.js"></script>
+<script>
+  function GenerateOb(){
+    var ob = Math.floor(Math.random()*1000000);
 
+    document.getElementById("obnumber").style.backgroundColor ='#0b9002';
 
+    document.getElementById("obnumber").value=ob;
+    document.getElementById("generateob").innerHTML='Done! Proceed';
+    $('#generateob').removeAttr('onclick');
+
+    // console.log(ob);
+  }
+ function Validate () {
+    // body... 
+    var obnumber =document.getElementById("obnumber").value;
+    var policetype =document.getElementById("policetype").value;
+    var idnumber =document.getElementById("idnumber").value;
+    var fullnames =document.getElementById("fullnames").value;
+    var gender =document.getElementById("gender").value;
+    var dateofbirth =document.getElementById("dateofbirth").value;
+    var dateofarrest =document.getElementById("dateofarrest").value;
+    var description =document.getElementById("description").value;
+
+    var data={};
+    data.obnumber=obnumber;
+    data.policetype=policetype;
+    data.idnumber=idnumber;
+    data.fullnames=fullnames;
+    data.gender=gender;
+    data.dateofbirth=dateofbirth;
+    data.dateofarrest=dateofarrest;
+    data.description=description;
+    console.log(data);
+
+    if (obnumber!==""&&policetype!==""&&idnumber!==""&&fullnames!==""&&gender!==""&&dateofbirth!==""&&dateofarrest!=="") {
+      $.ajax({
+        type:'POST',
+        url:'assets/addchargesheet.php',
+        data:data,
+        success:function(response){
+          $('html,body').animate({scrollTop:0},"slow");
+          $('#successmessage').css('display','');
+          $('#successmessage').html(response);
+          // document.getElementById("successmessage").innerHTML=response;
+          console.log(response);
+          setTimeout(() => {
+            location.reload();
+          }, 3000);
+
+          //location.reload();
+        },
+        error:function(response){
+          console.log(response);
+          // setTimeout(() => {
+          //   alert('Try Again');
+          // }, 1000);
+        }
+      });
+        // document.getElementById("chargesheet").submit();
+    }else{
+      alert('Make Sure All Fields are Filled !');
+      document.getElementById("obnumber").value=null;
+    }
+    return false;
+  } 
+</script>
+
+  
    
 
   </body>

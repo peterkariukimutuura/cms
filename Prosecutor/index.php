@@ -10,7 +10,14 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
   $_SESSION['errormessage']="Kindly login To Proceed!";
   header("location:http://localhost/courtcasesystem/login/");
 
+}else{
+	if ($_SESSION['occupation']!=="Prosecutor") {
+	  $_SESSION['errormessage']="Kindly login With A Prosecutor Account to Proceed!";
+	  header("location:http://localhost/courtcasesystem/login/");
+	}
 }
+
+
 
 
 $sql="SELECT * FROM chargesheets WHERE sendstatus='sent to prosecutor' ORDER BY id DESC";
@@ -43,7 +50,7 @@ $results=mysqli_query($conn,$sql);
 	<div id="navbar">
 		<a id="heading" href="../" class="pull-left" style="text-decoration: none;">Court Case System</a>
 		<h1 id="headlink">Home</h1>
-		<a style="left: 67%;" id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
+		<a style="left: 67%;" id="profilepage" href="#">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 86%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
 	<div class="contentholder">
@@ -72,13 +79,14 @@ $results=mysqli_query($conn,$sql);
 					<th>Charge</th>
 					<th>Date Of Arrest</th>
 					<th>Action</th>
+					
 				</tr>
 				<?php while($row=mysqli_fetch_assoc($results)): ?>
 					<tr>
 						<td><small><?php echo $row['id']; ?></small></td>
 						<td><small><?php echo $row['name']; ?></small></td>
 						<td><small><?php echo $row['dateofbirth']; ?></small></td>
-						<td style="width: 45%;"><small><?php echo substr($row['charge'], 0,100); ?><br>
+						<td style="width: 45%;"><small><?php echo substr($row['charge'], 0,50); ?><br>
 							<a href="view.php?id=<?php echo($row['id']); ?>">read more..</a></small></td>
 						 </small></td>
 						<td><small><?php echo $row['dateofarrest']; ?></small></td>
@@ -200,7 +208,7 @@ $results=mysqli_query($conn,$sql);
 
 						
 					}else{
-						alert('Kindly Refresh The Page!');
+						alert(response);
 					}
 				},
 				error:function(response){

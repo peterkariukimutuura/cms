@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$status=mysqli_real_escape_string($conn,validate($_POST['status']));
 	$prosecutor=mysqli_real_escape_string($conn,validate($_POST['prosecutor']));
 	$sendstatus='prosecutor-'.$status;
-	if (!empty($remarks)&&!empty($chargesheetnum)&&!empty($status)) {
+	if (!empty($chargesheetnum)&&!empty($status)) {
 		# code...
 		$sql="INSERT INTO `prosecutorremarks` (`prosecutor`, `chargesheet`, `remarks`, `status`) 
 		VALUES ('$prosecutor', '$chargesheetnum', '$remarks', '$status')";
