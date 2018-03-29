@@ -58,7 +58,7 @@ $results=mysqli_query($conn,$sql);
             <h1 id="headlink">
                 Home
             </h1>
-            <a href="#" id="profilepage">
+            <a href="profile.php" id="profilepage">
                 Welcome,
                 <?php echo $_SESSION['username']; ?>
             </a>

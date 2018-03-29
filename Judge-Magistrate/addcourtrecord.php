@@ -71,7 +71,7 @@ if (isset($_GET['id'])) {
 	<div id="navbar">
 		<a  id="heading" href="index.php" class="pull-left" style="text-decoration: none;">Court Case System</a>
     <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">Add Court Record</h1>
-    <a id="profilepage" href="#">Welcome,<?php echo $_SESSION['username']; ?></a>
+    <a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
   <a href="index.php" id="goback">Go Back</a>
