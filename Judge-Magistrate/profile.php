@@ -58,6 +58,25 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
     <p style="text-align: center;">User Account Information</p>
     <div id="holder">
       <div id="siderone">
+        <table>
+          <tr>
+            <td colspan="2" style="text-align: center;">
+              <img src="images/court.png" alt="Profile Pic" style="width: 50%; height: 50%;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"><strong style="color: #730707;">User Name</strong> &nbsp&nbsp&nbsp</td>
+            <td style="text-align: left;"><?php echo $_SESSION['username']; ?></td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"><strong style="color: #730707;">Occupation</strong> &nbsp&nbsp&nbsp</td>
+            <td style="text-align: left;"><?php echo $_SESSION['occupation']; ?></td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"><strong style="color: #730707;">Email</strong> &nbsp&nbsp&nbsp</td>
+            <td style="text-align: left;"><small><?php echo $_SESSION['email']; ?></small></td>
+          </tr>
+        </table>
 
         
       </div>
