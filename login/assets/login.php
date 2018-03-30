@@ -23,6 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$_SESSION['username']=$row['username'];
 				// $_SESSION['occupation']=$row['occupation'];
 				$_SESSION['email']=$row['email'];
+				$_SESSION['userid']=$row['id'];
+				$_SESSION['image']=$row['image'];
 				
 				if ($row['occupation']=="1") {
 					$_SESSION['occupation']="Prosecutor";

@@ -4,17 +4,17 @@ session_start();
 //include the connection from the database
 
 include '../register/assets/databaseconnection.php';
-include 'assets/editprofile.php';
+include '../Judge-Magistrate/assets/editprofile.php';
 
 
 if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SESSION['email'])) {
   $_SESSION['errormessage']="Kindly login To Proceed!";
   header("location:http://localhost/courtcasesystem/login/");
 }else{
-    if ($_SESSION['occupation']!=="Judge/Magistrate") {
-      $_SESSION['errormessage']="Kindly login With A Judge/Magistrate Account to Proceed!";
-      header("location:http://localhost/courtcasesystem/login/");
-    }
+  if ($_SESSION['occupation']!=="Police") {
+    $_SESSION['errormessage']="Kindly login With A Police Account to Proceed To Proceed!";
+    header("location:http://localhost/courtcasesystem/login/");
+  }
 }
 
 
@@ -66,8 +66,8 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
           </tr>
           <tr>
             <td colspan="2" style="text-align: center;">
-              <img src="<?php 
-               echo !empty($_SESSION['image'])?$_SESSION['image']: 'images/court.png'; 
+              <img src="../Judge-Magistrate/<?php 
+               echo !empty($_SESSION['image'])?$_SESSION['image']: 'images/policelogo.png'; 
                ?>" alt="Profile Pic" style="width: 45%; height: 200px;"><br>
             </td>
           </tr>
