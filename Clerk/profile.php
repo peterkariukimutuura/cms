@@ -36,7 +36,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Police</title>
+    <title>Clerk</title>
     
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -50,7 +50,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
   <body>
     <div id="navbar">
         <a  id="heading" class="pull-left">Court Case System</a>
-    <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">Charge Sheet View</h1>
+    <h1 id="headlink" style="font-size: 20px;margin-top: 22px;">Clerk</h1>
     <a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
         <a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
     </div><br>
@@ -76,7 +76,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
           <tr>
             <td colspan="2" style="text-align: center;">
               <img src="<?php 
-               echo !empty($_SESSION['image'])?$_SESSION['image']: 'images/policelogo.png'; 
+               echo !empty($_SESSION['image'])?$_SESSION['image']: 'images/clerk.png'; 
                ?>" alt="Profile Pic" style="width: 45%; height: 200px;"><br>
             </td>
           </tr>
@@ -123,7 +123,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 
 
 
-  <div class="footer">
+  <div class="footer" style="text-align: center;">
     <small>&copy 2018 Court Management System. Police DepartMent</small>
   </div>
 
