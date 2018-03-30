@@ -111,7 +111,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
             }
 
           }
-          console.log(response);
+          // console.log(response);
           // console.log(response.row);
           // console.log(response.status);
         },
