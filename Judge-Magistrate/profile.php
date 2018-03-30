@@ -56,7 +56,14 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 
 
   <div class="content">
-    
+  <?php if(!empty($_SESSION['profile-edit-success'])): ?>
+    <div style="color: green; text-align: center;">
+      <?php echo $_SESSION['profile-edit-success']; ?>
+      <!-- User Successfully Registered! Proceed to login -->
+    </div><br>
+    <?php unset($_SESSION['profile-edit-success']); ?>
+  <?php endif; ?>
+
     <div id="holder">
       <div id="siderone">
         <p style="text-align: center;">User Account Information</p>

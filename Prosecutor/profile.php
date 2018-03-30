@@ -11,11 +11,12 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
   $_SESSION['errormessage']="Kindly login To Proceed!";
   header("location:http://localhost/courtcasesystem/login/");
 }else{
-  if ($_SESSION['occupation']!=="Police") {
-    $_SESSION['errormessage']="Kindly login With A Police Account to Proceed To Proceed!";
+  if ($_SESSION['occupation']!=="Prosecutor") {
+    $_SESSION['errormessage']="Kindly login With A Prosecutor Account to Proceed!";
     header("location:http://localhost/courtcasesystem/login/");
   }
 }
+
 
 
 
@@ -34,13 +35,12 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Police</title>
+    <title>Prosecutor</title>
     
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="../register/css/stylesheet.css">
-   <!-- <link rel="stylesheet" href="css/stylesheet.css"> -->
-   <link rel="stylesheet" href="css/styles.css">
+     <link rel="stylesheet" href="../Police/css/styles.css">
+     <link rel="stylesheet" href="css/styles.css">
 
 
   </head>
@@ -74,7 +74,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
           <tr>
             <td colspan="2" style="text-align: center;">
               <img src="<?php 
-               echo !empty($_SESSION['image'])?$_SESSION['image']: 'images/policelogo.png'; 
+               echo !empty($_SESSION['image'])?$_SESSION['image']: 'images/logo.png'; 
                ?>" alt="Profile Pic" style="width: 45%; height: 200px;"><br>
             </td>
           </tr>
