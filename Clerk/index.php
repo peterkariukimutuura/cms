@@ -54,6 +54,10 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
     color: black;font-weight: lighter;">Search</button>
    
  </div>
+ <div id="display" style="display: inline-flex;margin-left:20px;margin-right: 20px; ">
+
+   
+ </div>
 
 
 
@@ -63,9 +67,60 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 <script type="text/javascript" src="../js/jquery.js"></script>
 
 <script type="text/javascript">
+  document.getElementById("display").innerHTML="";
   function search(){
+    document.getElementById("display").innerHTML="";
     var personname =$('#personname').val();
     if (personname!=="") {
+      alert('Processing...');
+      $.ajax({
+        type:'POST',
+        url:'assets/search.php',
+        data:{personname:personname},
+        success:function(response){
+          var response=JSON.parse(response);
+          if (response.status=="success") {
+            // console.log(response.row);
+            var data =response.row;
+            for (var i = 0; i < data.length; i++) {
+              document.getElementById("display").innerHTML+= `
+
+            <div id="specific" style="width: 400px;margin: 10px;padding: 10px;background-color: #e0e0e0;">
+              <div>
+                <span style="color: green"><small>OB Number &nbsp </small></span>` +data[i].ob + `
+              </div>
+              <div>
+                <span style="color: green"><small> Identity Number &nbsp  </small></span>`+data[i].identitynumber+`
+              </div>
+              <div>
+                <span style="color: green"><small> Name &nbsp </small></span>`+data[i].name+`
+              </div>
+              <div>
+                <span style="color: green"><small> Gender &nbsp </small></span>`+data[i].gender+`
+              </div>
+              <div>
+                <span style="color: green"><small> Charge &nbsp </small></span><br>
+                `+data[i].charge+`
+              </div>
+              <div>
+                <span style="color: green"><small> Added By &nbsp </small></span>`+data[i].addedby+`
+              </div> 
+            </div>
+
+              `;
+            }
+
+          }
+          console.log(response);
+          // console.log(response.row);
+          // console.log(response.status);
+        },
+        error:function(response){
+          console.log(response);
+        }
+
+      });
+
 
     }else{
       alert('Enter A Person Name On The Field');
