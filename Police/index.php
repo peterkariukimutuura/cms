@@ -44,7 +44,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 	<div id="navbar">
 		<a id="heading" class="pull-left">Court Case System</a>
     <h1 id="headlink">Home</h1>
-    <a id="profilepage" href="#">Welcome,<?php echo $_SESSION['username']; ?></a>
+    <a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
 		<a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
   <div class="sectionone">

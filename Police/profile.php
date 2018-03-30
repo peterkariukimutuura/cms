@@ -39,8 +39,8 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="../register/css/stylesheet.css">
-   <link rel="stylesheet" href="css/stylesheet.css">
-   <link rel="stylesheet" href="../Police/css/styles.css">
+   <!-- <link rel="stylesheet" href="css/stylesheet.css"> -->
+   <link rel="stylesheet" href="css/styles.css">
 
 
   </head>
@@ -60,14 +60,14 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
     <div id="holder">
       <div id="siderone">
         <p style="text-align: center;">User Account Information</p>
-        <table id="profiledetails">
+        <table id="profiledetails" style="width: 100%;">
           <tr>
             <td colspan="2" style="text-align: center;">Avatar</td>
           </tr>
           <tr>
             <td colspan="2" style="text-align: center;">
-              <img src="../Judge-Magistrate/<?php 
-               echo !empty($_SESSION['image'])?$_SESSION['image']: 'images/policelogo.png'; 
+              <img src="<?php 
+               echo !empty($_SESSION['image'])?'../Judge-Magistrate/'.$_SESSION['image']: 'images/policelogo.png'; 
                ?>" alt="Profile Pic" style="width: 45%; height: 200px;"><br>
             </td>
           </tr>
