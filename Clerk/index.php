@@ -47,9 +47,13 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
      <a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
      <a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
- <h1>Clerk,Page</h1><br>
-<p>Welcome <?php echo $_SESSION['username']; ?>, You are now logged In as <?php echo $_SESSION['occupation']; ?></p><br>
-<p><?php echo $_SESSION['email']; ?></p>
+ <h1 style="margin-bottom: 0px;padding-bottom: 0px;">Search Record</h1><br>
+ <div id="searchbox" style="width: 100%; display: block;text-align: center;">
+  <input id="personname" type="text" placeholder="Try Person Name" style="width: 55%;margin-top: 0px;outline: none;">
+  <button type="button" onclick="search()" style="width: 20%;padding: 5px;margin-top: 0px;background-color: #5ed45e;
+    color: black;font-weight: lighter;">Search</button>
+   
+ </div>
 
 
 
@@ -57,6 +61,19 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
 
 
 <script type="text/javascript" src="../js/jquery.js"></script>
+
+<script type="text/javascript">
+  function search(){
+    var personname =$('#personname').val();
+    if (personname!=="") {
+
+    }else{
+      alert('Enter A Person Name On The Field');
+      $('#personname').css({'borderColor':'red'});
+    }
+
+  }
+</script>
 
 
    
