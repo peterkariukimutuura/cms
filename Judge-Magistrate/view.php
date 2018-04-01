@@ -79,7 +79,7 @@ if (isset($_GET['id'])) {
   <a id="addcourtrecordfromview" href="addcourtrecord.php?id=<?php echo $row['id']; ?>" >Add a Court Record</a>
 
 
-  <div class="content">
+  <div class="content" style="height: auto;">
     <p style="text-align: center;">Specific Charge Sheet</p>
     <table id="content">
       <tr>
@@ -103,8 +103,25 @@ if (isset($_GET['id'])) {
         <td style="text-align: left;"><?php echo $row['gender']; ?></td>
       </tr>
       <tr>
-        <td>Date Of Arrest</td>
-        <td style="text-align: left;"><?php echo $row['dateofbirth']; ?></td>
+        <td>Age</td>
+        <td style="text-align: left;"><?php 
+            $date1 = $row['dateofbirth'];
+            $date2 = date('Y-m-d');
+
+            $diff = abs(strtotime($date2) - strtotime($date1));
+
+            $years = floor($diff / (365*60*60*24));
+            $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+            $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+            // printf("%d years, %d months, %d days\n", $years, $months, $days);
+
+        // echo $row['dateofbirth'];
+            echo $years . " years";
+
+         ?>
+          
+        </td>
       </tr>
       <tr>
         <td>Date Of Arrest</td>

@@ -113,6 +113,8 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
               `;
             }
 
+          }else{
+            alert('There are No records with such name.Try Another Name');
           }
           // console.log(response);
           // console.log(response.row);

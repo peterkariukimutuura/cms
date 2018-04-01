@@ -55,7 +55,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
   <a href="index.php" id="goback" style="top: 16%;">Go Back</a>
 
 
-  <div class="content">
+  <div class="content" style="height: 515px;">
   <?php if(!empty($_SESSION['profile-edit-success'])): ?>
     <div style="color: green; text-align: center;">
       <?php echo $_SESSION['profile-edit-success']; ?>

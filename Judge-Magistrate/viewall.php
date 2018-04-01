@@ -58,7 +58,7 @@ $sql = "SELECT * FROM courtrecord";
 <br>
 <br>
 
-  <div class="content">
+  <div class="content" style="height: auto;">
     <?php if($results): ?>
       <?php if(mysqli_num_rows($results)>0): ?>
         

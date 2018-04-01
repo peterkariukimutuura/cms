@@ -101,8 +101,22 @@ if (isset($_GET['id'])) {
         <td style="text-align: left;"><?php echo $row['gender']; ?></td>
       </tr>
       <tr>
-        <td>Date Of Birth</td>
-        <td style="text-align: left;"><?php echo $row['dateofbirth']; ?></td>
+        <td>Age</td>
+        <td style="text-align: left;"><?php 
+            $date1 = $row['dateofbirth'];
+            $date2 = date('Y-m-d');
+
+            $diff = abs(strtotime($date2) - strtotime($date1));
+
+            $years = floor($diff / (365*60*60*24));
+            $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+            $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+            
+            echo $years . " years";
+
+         ?>
+          
+        </td>
       </tr>
       <tr>
         <td>Date Of Arrest</td>
