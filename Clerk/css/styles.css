@@ -73,3 +73,26 @@ a#goback{
         top: 14%;
     color: #fff;
 }
+
+/*view*/
+
+a#goback:hover{
+        background-color: #7fb32c;
+        cursor: pointer;
+}
+
+table#content{
+    border-spacing: 0;
+        width: 70%;
+    margin: 20px auto;
+}
+
+table#content td{
+        width: 215px;
+    padding: 10px;
+    text-align: center;
+}
+
+table#content tr:nth-child(odd){
+        background-color: #e4e0e0;
+}

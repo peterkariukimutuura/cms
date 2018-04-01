@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
   <a href="index.php" id="goback" style="top: 16%;">Go Back</a>
 
 
-  <div class="content">
+  <div class="content" style="height: 515px;">
 <?php if(!empty($_SESSION['profile-edit-success'])): ?>
   <div style="color: green; text-align: center;">
     <?php echo $_SESSION['profile-edit-success']; ?>
@@ -66,7 +66,7 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
   <?php unset($_SESSION['profile-edit-success']); ?>
 <?php endif; ?>
     
-    <div id="holder">
+    <div id="holder" >
       <div id="siderone">
         <p style="text-align: center;">User Account Information</p>
         <table id="profiledetails" style="width: 100%;">
@@ -109,8 +109,10 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
               <option value="2">Police</option>
             </select><br><br> -->
             <input type="text" name="email" placeholder="Email" id="email" ><br><br>
+
             <input type="file" name="image" style="text-indent: 0px;"><br><br>
-            <button type="button" onclick="Check()" style="color: #270e04;">Submit</button>
+            <button type="button" onclick="Check()" style="color: #270e04;">Change</button><hr>
+            <button type="button" style="width: 20%;font-size: 10px;background-color: #5ae25a;color: #000;" onclick="changePassword()">Change Password</button>
 
             
           </form>
@@ -128,7 +130,9 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
   </div>
 
 <script type="text/javascript" src="../js/jquery.js"></script>
+
 <script type="text/javascript">
+
   function Check(){
     var username =$('#username').val();
     if (username=="") {
@@ -149,6 +153,50 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
         alert('Try Again Later');
       }, 2000);
     }
+  }
+
+  function changePassword(){
+    var oldpassword=prompt("Enter Old Password");
+    if (oldpassword==""||oldpassword==null) {
+      alert("Old Password is required to complete the process!");
+      return;
+    }
+    var newpassword=prompt("Enter New Password");
+    if (newpassword==""||newpassword==null) {
+      alert("New Password is required to complete the process!");
+      return;
+    }
+    var confirmnewPassword=prompt("Confirm New Password");
+    if (confirmnewPassword==""||confirmnewPassword==null) {
+      alert("Confirm Password!");
+      return;
+    }
+    if (oldpassword!==""&&newpassword!==""&&confirmnewPassword!=="") {
+      if (newpassword!==confirmnewPassword) {
+        alert("Action Failed! The Newly Added Password doesnot match the Confirmation Password!Try Again");
+        return
+      }else{
+        console.log(oldpassword + "\n" +newpassword+ "\n" +confirmnewPassword);
+        $.ajax({
+          type:'post',
+          url:'assets/changepassword.php',
+          data:{old:oldpassword,new:newpassword,userid:"<?php echo $_SESSION['userid']; ?>"},
+          success:function(response){
+            console.log(response);
+          },
+          error:function(response){
+            console.log(response);
+          }
+
+
+        });
+        
+      }   
+
+    }else{
+      alert("Action was Unsuccessful! You did not Add any Values on the Prompt!");
+    }
+
   }
 </script>
 

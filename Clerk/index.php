@@ -47,14 +47,15 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
      <a id="profilepage" href="profile.php">Welcome,<?php echo $_SESSION['username']; ?></a>
      <a id="heading" style="left: 87%;text-decoration: none;" class="pull-right" href="assets/logout.php">Logout</a>
 	</div>
- <h1 style="margin-bottom: 0px;padding-bottom: 0px;">Search Record</h1><br>
+ <h1 style="margin-bottom: 0px;padding-bottom: 0px;text-align: center;">Search Record</h1><br>
  <div id="searchbox" style="width: 100%; display: block;text-align: center;">
   <input id="personname" type="text" placeholder="Try Person Name" style="width: 55%;margin-top: 0px;outline: none;">
   <button type="button" onclick="search()" style="width: 20%;padding: 5px;margin-top: 0px;background-color: #5ed45e;
     color: black;font-weight: lighter;">Search</button>
    
  </div>
- <div id="display" style="display: inline-flex;margin-left:20px;margin-right: 20px; ">
+ <div id="display" style=";margin:20px auto; ">
+
 
    
  </div>
@@ -85,9 +86,11 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
             for (var i = 0; i < data.length; i++) {
               document.getElementById("display").innerHTML+= `
 
-            <div id="specific" style="width: 400px;margin: 10px;padding: 10px;background-color: #e0e0e0;">
+            <div id="specific" style="width: 400px;margin: 10px;padding: 10px;background-color: #e0e0e0;float:left;">
               <div>
-                <span style="color: green"><small>OB Number &nbsp </small></span>` +data[i].ob + `
+                  <a href="view.php?id=`+data[i].id+`" style="text-decoration:none;cursor:pointer;">
+                    <span style="color: green"><small>OB Number &nbsp </small></span>` +data[i].ob + `
+                  </a>
               </div>
               <div>
                 <span style="color: green"><small> Identity Number &nbsp  </small></span>`+data[i].identitynumber+`

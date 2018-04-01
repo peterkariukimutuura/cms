@@ -25,16 +25,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	    }
 
 	}
+	if (!empty($username)&&!empty($email)) {
 
-	$sql="UPDATE users SET username='$username',email= '$email',image='$imagepath' 
-					WHERE id='$userid'";
-	if (mysqli_query($conn,$sql)) {
+		$sql="UPDATE users SET username='$username',email= '$email',image='$imagepath' 
+						WHERE id='$userid'";
+		if (mysqli_query($conn,$sql)) {
+			# code...
+			$_SESSION['profile-edit-success']="Your Profile Has Been Successfully Changed!";
+			$_SESSION['email']=$email;
+			$_SESSION['username']=$username;
+		}else{
+			echo mysqli_error($conn);
+		}
 		# code...
-		$_SESSION['profile-edit-success']="Your Profile Has Been Successfully Changed!";
-		$_SESSION['email']=$email;
-		$_SESSION['username']=$username;
 	}else{
-		echo mysqli_error($conn);
+		$_SESSION['profile-edit-success']="kindly add Required Field!";
 	}
 
 
