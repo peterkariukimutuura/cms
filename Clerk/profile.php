@@ -176,16 +176,19 @@ if (!isset($_SESSION['username'])&&!isset($_SESSION['occupation'])&&!isset($_SES
         alert("Action Failed! The Newly Added Password doesnot match the Confirmation Password!Try Again");
         return
       }else{
-        console.log(oldpassword + "\n" +newpassword+ "\n" +confirmnewPassword);
+        // console.log(oldpassword + "\n" +newpassword+ "\n" +confirmnewPassword);
+        alert('Processing...');
         $.ajax({
           type:'post',
           url:'assets/changepassword.php',
           data:{old:oldpassword,new:newpassword,userid:"<?php echo $_SESSION['userid']; ?>"},
           success:function(response){
-            console.log(response);
+            alert(response);
+            // console.log(response);
           },
           error:function(response){
-            console.log(response);
+            alert(response);
+            // console.log(response);
           }
 
 
